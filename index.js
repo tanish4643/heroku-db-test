@@ -71,4 +71,4 @@ app.get('/vegetable/:id', async (req, res) => {
 });
 /* ROUTE SECTION ENDS */
 
-app.listen(3000, () => console.log(`app listening on port 3000!`))
+app.listen(process.env.PORT || 3000, () => console.log(`app listening on port 3000!`))
