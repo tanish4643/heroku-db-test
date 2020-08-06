@@ -10,12 +10,12 @@ app.use(bodyParser.json());
 
 /* ROUTE SECTION STARTS */
 app.get('/', async (req, res) => {
-    res.send("GET  <br/> <a href='http://localhost:3000/fruits'>http://localhost:3000/fruits</a><br/> Get all records from Fruits Table <br/><br/>" + 
-             "GET  <br/> <a href='http://localhost:3000/vegetables'>http://localhost:3000/vegetables</a>  <br/> Get all records from Vegetables Table <br/><br/>" + 
+    res.send("GET  <br/> <a href='/fruits'>http://localhost:3000/fruits</a><br/> Get all records from Fruits Table <br/><br/>" + 
+             "GET  <br/> <a href='/vegetables'>http://localhost:3000/vegetables</a>  <br/> Get all records from Vegetables Table <br/><br/>" + 
              "POST <br/> http://localhost:3000/fruit       <br/> Save a new Fruit into Fruits Table         <br/> {name: 'Orange', color: 'orange'} <br/><br/>" + 
              "POST <br/> http://localhost:3000/vegetable   <br/> Save a new Vegetable into Vegetables Table <br/> {name: 'Carrot', color: 'red'} <br/><br/>" + 
-             "GET  <br/> <a href='http://localhost:3000/fruit/1'>http://localhost:3000/fruit/1</a><br/> Get details for fruit with id: 1 <br/><br/>" + 
-             "GET  <br/> <a href='http://localhost:3000/vegetable/1'>http://localhost:3000/vegetable/1</a><br/> Get details for Vegetable with id: 1 <br/><br/>");
+             "GET  <br/> <a href='/fruit/1'>http://localhost:3000/fruit/1</a><br/> Get details for fruit with id: 1 <br/><br/>" + 
+             "GET  <br/> <a href='/vegetable/1'>http://localhost:3000/vegetable/1</a><br/> Get details for Vegetable with id: 1 <br/><br/>");
 });
 
 app.get('/fruits', async (req, res) => {
