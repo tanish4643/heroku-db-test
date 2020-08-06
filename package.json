@@ -1,0 +1,20 @@
+{
+  "name": "dbtest",
+  "version": "1.0.0",
+  "description": "A Sample App to create connection to Postgresql DB",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.14.0",
+    "express-session": "^1.17.0",
+    "pg": "^8.3.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.4"
+  }
+}
