@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const Sequelize = require('sequelize')
 const sequelize = new Sequelize('postgres://uujvltenecqnft:d67db419f72f07ec955fb2e8ad1af06a06c559efc9a1e09ebe7b7f87641b480e@ec2-54-159-138-67.compute-1.amazonaws.com:5432/daf1kvus5lrv0j');
 
-const User = require('model/user');
+const User = require('./model/user');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
