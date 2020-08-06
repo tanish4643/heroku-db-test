@@ -1,5 +1,3 @@
-module.exports = User;
-
 const User = sequelize.define('user', {
     firstName: {
         type: Sequelize.STRING,
@@ -9,3 +7,5 @@ const User = sequelize.define('user', {
         type: Sequelize.STRING
     }
 }, {});
+
+module.exports = User;
