@@ -1,46 +1,69 @@
 const express = require('express');
 const app = express();
+const env = require('./config/config');
 const bodyParser = require('body-parser');
-const Sequelize = require('sequelize')
-const sequelize = new Sequelize('postgres://uujvltenecqnft:d67db419f72f07ec955fb2e8ad1af06a06c559efc9a1e09ebe7b7f87641b480e@ec2-54-159-138-67.compute-1.amazonaws.com:5432/daf1kvus5lrv0j');
 
-const User = require('./model/user');
+const db = require('./models/index.js');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-/* DATABASE SECTION ENDS */
-sequelize.authenticate()
-.then(() => {
-    console.log('Connection has been established successfully.');
-})
-.catch(err => {
-    console.error('Unable to connect to the database:', err);
+/* ROUTE SECTION STARTS */
+app.get('/', async (req, res) => {
+    res.send("GET  <br/> http://localhost:3000/fruits      <br/> Get all records from Fruits Table <br/><br/>" + 
+             "GET  <br/> http://localhost:3000/vegetables  <br/> Get all records from Vegetables Table <br/><br/>" + 
+             "POST <br/> http://localhost:3000/fruit       <br/> Save a new Fruit into Fruits Table         <br/> {name: 'Orange', color: 'orange'} <br/><br/>" + 
+             "POST <br/> http://localhost:3000/vegetable   <br/> Save a new Vegetable into Vegetables Table <br/> {name: 'Carrot', color: 'red'} <br/><br/>" + 
+             "GET  <br/> http://localhost:3000/fruit/1     <br/> Get details for fruit with id: 1 <br/><br/>" + 
+             "GET  <br/> http://localhost:3000/vegetable/1 <br/> Get details for Vegetable with id: 1 <br/><br/>");
 });
 
-User.sync({ force: true });
-/* DATABASE SECTION ENDS */
+app.get('/fruits', async (req, res) => {
+    const fruits = await db.Fruits.findAll({raw: true});
+    res.json(fruits);
+});
 
-/* ROUTE SECTION STARTS */
-app.get('/', (req, res) => res.json({ message: 'Hello World' }));
+app.get('/vegetables', async (req, res) => {
+    const vegetables = await db.Vegetables.findAll({raw: true});
+    res.json(vegetables);
+});
 
-app.post('/user', async (req, res) => {
+app.post('/fruit', async (req, res) => {
     try {
-        const newUser = new User(req.body)
-        await newUser.save()
-        res.json({ user: newUser })
+        const newFruit = new db.Fruits(req.body)
+        await newFruit.save()
+        res.json({ fruit: newFruit })
     } catch(error) {
         console.error(error)
     }
 });
 
-app.get('/user/:userId', async (req, res) => {
-    const userId = req.params.userId
+app.post('/vegetable', async (req, res) => {
     try {
-        const user = await User.findAll({
-            where: {id: userId}
-        });
-        res.json({ user })
+        const newVeg = new db.Vegetables(req.body)
+        await newVeg.save()
+        res.json({ fruit: newVeg })
+    } catch(error) {
+        console.error(error)
+    }
+});
+
+app.get('/fruit/:id', async (req, res) => {
+    const id = req.params.id
+    try {
+        const fruit = await db.Fruits.findAll({ where: {id: id}});
+        res.json({ fruit })
+    }
+    catch(error) {
+        console.error(error)
+    }    
+});
+
+app.get('/vegetable/:id', async (req, res) => {
+    const id = req.params.id
+    try {
+        const vegetable = await db.Vegetables.findAll({ where: {id: id}});
+        res.json({ vegetable })
     }
     catch(error) {
         console.error(error)
